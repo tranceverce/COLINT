@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+    <div  class="container text-center mt-2">
+        <h1>Weather Forecast</h1>
+        <br>
+        <input placeholder="Enter city name" class="form-control" id="city" type="text">
+        <br>
+        <button class="btn btn-primary" type="button" onclick="get_Data()">FETCH</button>
+    </div>
+    <hr>
+    <div id="result" class="container"></div>
+    <script src="app.js"></script>
+</body>
+</html>
