@@ -18,7 +18,7 @@ class bloodgroup(models.Model):
     contact = models.CharField(max_length=10)
     department = models.CharField(max_length=30)
     city = models.CharField(max_length=30)
-    blood_group_types = models.TextChoices("Blood Group","A+ A- B+ B- O+ O-")
+    blood_group_types = models.TextChoices("Blood Group","A+ A- B+ B- O+ O- AB+ AB-")
     blood_group = models.CharField(choices=blood_group_types.choices, max_length=10)
 
     def __str__(self):
