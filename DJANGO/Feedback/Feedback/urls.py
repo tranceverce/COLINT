@@ -23,5 +23,7 @@ from Faces import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('stats', views.stat, name='stats')
+    path('stats', views.stat, name='stats'),
+    path('login', views.login, name='login'),
+
 ]
