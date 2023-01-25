@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 # Create your views here.
 from django.db.models import F
 from .models import face
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import authenticate, login, logout
 
 
 
@@ -24,10 +26,20 @@ def stat(request):
     best=face.best
     context= {
         'bad': bad,
-        'good': good,
+        'good': 5,
         'best': best,
         }
     return render(request, 'Faces/graphs.html',context)
 
 def login(request):
-    return render(request, 'Faces/login.html')
+    if request.method=='GET':
+        return render(request, 'Faces/login.html',{'form':AuthenticationForm()})
+    else:
+        uname = request.POST['username']
+        upwd = request.POST['password']
+        user = authenticate(request, username=uname, password=upwd)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            return render(request, 'Faces/login.html',{'form':AuthenticationForm(),'message':'User Not Found. Try Again'})
