@@ -1,7 +1,7 @@
 var bodyParser = require('body-parser')
 const express = require('express')
 const { MongoClient } = require("mongodb");
-const uri ="mongodb+srv://SahilV433:Yaadnahi1234@cluster1.sfayszt.mongodb.net/?retryWrites=true&w=majority";
+const uri ="mongodb+srv://divij:Divijkumar@cluster0.5vctazg.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true })) // true for form handling, false for json data
@@ -52,4 +52,9 @@ app.post('/contact', function (req, res) {
     res.sendFile(__dirname+'/templates/contact.html')
     })
   
+  app.get('/news', function (req, res) {
+      //   res.send('Contact Page')
+        res.sendFile(__dirname+'/templates/newsletter.html')
+      })
+
 app.listen(3000)
