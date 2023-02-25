@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container text-center mt-2">
+        <h1>Chat App</h1>
+        <input class="form-control" type="text" placeholder="Enter message" id="mess">
+        <br>
+        <button class="btn btn-primary mb-2" type="submit" onclick="sendInfo()">Send Data</button>
+
+        <ul class="list-group" style="list-style:none;"></ul>
+    </div>
+
+    <emoji-picker></emoji-picker>
+
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"
+        integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI" crossorigin="anonymous">
+    </script>
+
+    <script>
+        var socket = io("http://localhost:3000")
+
+        document.querySelector('emoji-picker').addEventListener('emoji-click', event => console.log(event.detail));
+
+        function sendInfo() {
+            var x = document.getElementById('mess')
+            console.log(x.value)
+            socket.emit("chatinfo", x.value)
+        }
+        socket.on("chatinfo", (data) => {
+            console.log(data)
+            var li = document.createElement("li")
+            li.className = "alert alert-primary"
+            li.innerHTML = data
+            document.querySelector("ul").appendChild(li)
+        })
+    </script>
+
+
+</body>
+
+</html>

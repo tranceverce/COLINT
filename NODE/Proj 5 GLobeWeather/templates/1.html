@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!-- Include the CesiumJS JavaScript and CSS files -->
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.102/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.102/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="cesiumContainer"></div>
+    <div id="demo"
+        style='z-index: 2000; position: absolute; height:100px; width:200px; right: 10px; bottom: 0px; text-color: white'>
+    </div>
+
+
+
+    <script>
+        // Your access token can be found at: https://ion.cesium.com/tokens.
+        // This is the default access token from your ion account
+
+        // Cesium.Ion.defaultAccessToken =`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiODMyOTlmOS1hNWU5LTQxZmUtYTNlNi0zNTQ0MTI5OGNlMzUiLCJpZCI6MTIzNjg5LCJpYXQiOjE2NzU3NTQ2NjZ9.N53AKb4GdlZN0UNJmdZ_-64G0fEBVe_cVq2EzegppLw`
+        // Add Cesium OSM Buildings, a global 3D buildings layer.
+        // viewer = new Cesium.Viewer("cesiumContainer");
+
+        // Use clipping planes to selectively hide parts of the globe surface.
+
+        var viewer = new Cesium.Viewer('cesiumContainer', {
+            skyAtmosphere: false,
+            shouldAnimate: true,
+            terrainProvider: Cesium.createWorldTerrain()
+        });
+
+
+        viewer.zoomTo(viewer.entities);
+        viewer.entities.add({
+            id: 'mou',
+            label: {
+                // position : Cesium.Cartesian2.ZERO, 
+                show: true,
+            }
+        });
+
+        // GET LOCATION AND FETCH WEATHER
+        viewer.scene.canvas.addEventListener('click', function (e) {
+            var entity = viewer.entities.getById('mou');
+            var ellipsoid = viewer.scene.globe.ellipsoid;
+            // Mouse over the globe to see the cartographic position 
+            var cartesian = viewer.camera.pickEllipsoid(new Cesium.Cartesian3(e.clientX, e.clientY), ellipsoid);
+            if (cartesian) {
+                var cartographic = ellipsoid.cartesianToCartographic(cartesian);
+                var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(10);
+                var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(10);
+                console.log(longitudeString + " , " + latitudeString);
+
+                // Fetch Weather using openweatherapi
+                var url = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitudeString + "&lon=" +
+                    longitudeString +
+                    "&appid=1bcfce0704b3f2a332d73606907a9d83&units=metric"
+
+                // Fetch Weather
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data['cod'] === '404') {
+
+                        } else {
+                            var y = data['main']['temp']
+                            var z = data['name']
+                            alert("the weather at " + z + "is " + y + "ºC")
+                        }
+                    })
+
+
+                const pinBuilder = new Cesium.PinBuilder();
+
+                const bluePin = viewer.entities.add({
+                    name: "Blank blue pin",
+                    position: Cesium.Cartesian3.fromDegrees(-75.170726, 39.9208667),
+                    billboard: {
+                        image: pinBuilder.fromColor(Cesium.Color.ROYALBLUE, 48).toDataURL(),
+                        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                    },
+                });
+
+                
+            } else {
+                entity.label.show = false;
+            }
+
+        });
+    </script>
+    </div>
+</body>
+
+</html>

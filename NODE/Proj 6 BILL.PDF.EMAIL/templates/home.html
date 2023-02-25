@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container text-center mt-2">
+        <div style="display: inline-flex;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Bharat_BillPay_logo.svg/2560px-Bharat_BillPay_logo.svg.png"
+                height="50" style="margin-right: 5px">
+            <h1>Generate Bill</h1>
+            <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFKKrNDjlyUlPgD62kdx4OjWIv_D43lf_pZA&usqp=CAU"
+                height="50"> -->
+        </div>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Name</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Name"
+                    name="user_name">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter Email"
+                    name="email_id">
+            </div>
+            <div class="mb-3">
+                <label for="Date">Start Date</label>
+                <input type="date" id="sdate" name="sdate">
+            </div>
+            <div class="mb-3">
+                <label for="Date">End Date</label>
+                <input type="date" id="edate" name="edate">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Bill Amount</label>
+                <input type="number " class="form-control" id="exampleFormControlInput1" placeholder="Enter Amount"
+                    name="bill_am">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <iframe src="{!PDF}" height="100%" width="100%"></iframe>
+</body>
+
+</html>
