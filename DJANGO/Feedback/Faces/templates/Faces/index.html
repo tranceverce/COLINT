@@ -17,7 +17,7 @@
     <h1>We love hearing from you!</h1>
     <br><br><br>
 
-    <form action="" method="post">
+    <form action="" method="POST">
 
       <!-- IMAGES FOR SUGGESTION  -->
       <div class="container">
@@ -25,30 +25,45 @@
           {% csrf_token %}
           <div class="col-sm">
             {% load static %}
-            <button id="b1" onclick="a0" style="all:unset; cursor:pointer"><img src="{% static '2.png' %}" width="200vw"
-                height="200vh" alt="My image" onclick="a0()"></a></button>
+            <button id="b1" style="all:unset; cursor:pointer" type="submit" name="badd" value="{{bad}}"><img
+                src="{% static '2.png' %}" width="200vw" height="200vh" alt="My image" onclick="a0()"></a></button>
           </div>
-          
+
           <br>
 
           {% csrf_token %}
           <div class="col-sm">
             {% load static %}
-            <button id="b2" onclick="a0()" style="all:unset; cursor:pointer"><img src="{% static '1.png' %}" width="200vw"
-                height="200vh" alt="My image"></button>
+            <button id="b2" style="all:unset; cursor:pointer" type="submit" name="godd"><img src="{% static '1.png' %}"
+                width="200vw" height="200vh" onclick="a0()" alt="My image"></button>
           </div>
 
           <br>
-          
+
           {% csrf_token %}
           <div class="col-sm">
             {% load static %}
-            <button id="b3" onclick="a0" style="all:unset; cursor:pointer"><img src="{% static '3.png' %}" width="200vw"
-                height="200vh" alt="My image" id="b1" onclick="a0()"></button>
+            <button id="b3" style="all:unset; cursor:pointer" type="submit" name="bestt"><img src="{% static '3.png' %}"
+                width="200vw" height="200vh" alt="My image" id="b1" onclick="a0()"></button>
           </div>
         </div>
       </div>
 
+    </form>
+
+
+
+
+
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="col-sm">
+        {% load static %}
+        <div class="form-group">
+          {{ form.as_p }}
+        </div>
+      </div>
     </form>
 
 
@@ -57,7 +72,7 @@
     function a0() {
       document.getElementById('b1');
       // console.log("A")
-      alert('Thank Yu For Your Valuable Feedback')
+      alert('Thank You For Your Valuable Feedback !!')
     }
   </script>
 </body>
